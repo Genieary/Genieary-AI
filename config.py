@@ -2,7 +2,6 @@ import os
 from typing import List
 
 class Settings:
-    """애플리케이션 설정"""
     
     # 프로젝트 루트 경로
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -14,17 +13,11 @@ class Settings:
     
     IMAGE_SIZE: tuple = (48, 48)
     
-    # 감정 라벨 (Colab과 동일한 순서)
+    # 감정 라벨 
     EMOTION_LABELS: List[str] = [
         'angry', 'disgust', 'fear', 'happy', 
         'neutral', 'sad', 'surprise'
     ]
-    
-    # API 설정
-    API_TITLE: str = "감정 분석 API"
-    API_VERSION: str = "1.0.0"
-    HOST: str = "0.0.0.0"
-    PORT: int = 8000
     
     # CORS 설정
     ALLOW_ORIGINS: List[str] = ["*"]

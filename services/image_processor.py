@@ -49,25 +49,3 @@ class ImageProcessor:
             
         except Exception as e:
             raise ImageProcessingException(str(e))
-    
-    @staticmethod
-    def get_debug_info(image_bytes: bytes) -> dict:
-        """디버깅용 이미지 정보 추출"""
-        try:
-            # 원본 이미지 정보
-            original_image = Image.open(io.BytesIO(image_bytes))
-            
-            # 전처리된 이미지
-            processed_image = ImageProcessor.preprocess_image(image_bytes)
-            
-            return {
-                "original_size": original_image.size,
-                "original_mode": original_image.mode,
-                "processed_shape": processed_image.shape,
-                "processed_dtype": str(processed_image.dtype),
-                "processed_range": f"{processed_image.min():.6f} ~ {processed_image.max():.6f}",
-                "processed_mean": float(processed_image.mean()),
-                "processed_std": float(processed_image.std())
-            }
-        except Exception as e:
-            raise ImageProcessingException(str(e))
