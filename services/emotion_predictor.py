@@ -5,11 +5,9 @@ from services.image_processor import ImageProcessor
 from utils.exceptions import ModelNotLoadedException, PredictionException
 
 class EmotionPredictor:
-    """감정 예측 클래스"""
     
     @staticmethod
     def predict(image_bytes: bytes, filename: str = None) -> Dict:
-        """감정을 예측합니다"""
         
         # 모델 로드 확인
         if not model_loader.is_loaded:
@@ -26,22 +24,16 @@ class EmotionPredictor:
             # 예측 수행
             predictions = model.predict(processed_image, verbose=0)
             predicted_class = np.argmax(predictions[0])
-            confidence = float(predictions[0][predicted_class])
             
             # 모든 클래스의 확률
             all_predictions = {
-                emotion_labels[i]: float(predictions[0][i]) 
+                emotion_labels[i]: round(float(predictions[0][i]) * 100, 2)
                 for i in range(len(emotion_labels))
             }
             
-            # 디버깅 정보 출력
-            print(f"Raw predictions: {predictions[0]}")
-            print(f"Predicted class: {predicted_class}")
-            print(f"Predicted emotion: {emotion_labels[predicted_class]}")
-            
             result = {
                 "predicted_emotion": emotion_labels[predicted_class],
-                "confidence": confidence,
+                "confidence": round(float(predictions[0][predicted_class]) * 100, 2),
                 "all_predictions": all_predictions,
                 "filename": filename
             }
