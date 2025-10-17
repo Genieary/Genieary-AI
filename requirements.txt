@@ -5,3 +5,4 @@ tensorflow==2.20.0
 uvicorn==0.37.0
 cv2
 python-multipart
+httpx

@@ -41,3 +41,18 @@ class PredictionException(HTTPException):
             status_code=500, 
             detail=f"예측 중 오류 발생: {detail}"
         )
+
+class ImageDownloadException(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="이미지 다운로드에 실패했습니다"
+        )
+
+
+class ImageDownloadTimeoutException(HTTPException):
+    def __init__(self):
+        super().__init__(
+            status_code=status.HTTP_504_GATEWAY_TIMEOUT,
+            detail="이미지 다운로드 시간이 초과되었습니다"
+        )
